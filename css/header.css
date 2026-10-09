@@ -1,0 +1,158 @@
+/* ========================================================================= */
+/* FILE: css/header.css - THANH MENU CHUYỂN SẮC ĐỎ - XANH CHẠY TỚI LUI       */
+/* ĐÃ SỬA TRIỆT ĐỂ: XÓA BỎ BÓNG MỜ TRẮNG - LOGO SẮC NÉT & CHỮ NÉT CĂNG       */
+/* ========================================================================= */
+
+.site-header, .site-header * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 1. THANH HEADER CHÍNH CÓ HIỆU ỨNG GRADIENT DỊCH CHUYỂN MÀU */
+.site-header {
+    /* Giữ nguyên dải màu gradient gốc sang trọng của bạn */
+    background: linear-gradient(90deg, #4f0202, #880732, #08593e, #008855, #970737, #990000);
+    background-size: 400% 100%; /* Phóng to nền ra để chuẩn bị chuyển động mượt */
+    
+    /* Gắn hiệu ứng chạy tới lui liên tục */
+    animation: neonGradientMove 8s ease-in-out infinite alternate;
+    
+    /* Đổ bóng phát sáng mờ phía dưới thanh menu */
+    box-shadow: 0 4px 25px rgba(0, 255, 170, 0.25), 0 4px 35px rgba(255, 0, 85, 0.25);
+    padding: 8px 0; /* Thu nhỏ padding dọc lại từ 14px xuống 8px vì logo đã tăng kích thước */
+    width: 100%;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    display: block;
+}
+
+/* ĐỊNH NGHĨA HIỆU ỨNG CHẠY TỚI LUI CỦA DẢI MÀU */
+@keyframes neonGradientMove {
+    0% {
+        background-position: 0% 50%; /* Bắt đầu ở vị trí đầu dải màu */
+    }
+    100% {
+        background-position: 100% 50%; /* Chạy hết dải màu sang bên phải rồi tự giật lùi lại */
+    }
+}
+
+/* KHUNG CHỨA ÉP SÁT RÌA HAI BÊN MÀN HÌNH */
+.header-container {
+    width: 100%;
+    padding: 0 30px; /* Khoảng cách đệm nhỏ ở 2 biên rìa trái/phải */
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+/* 2. KHỐI BÊN TRÁI: LOGO SẮC NÉT + TÊN WEBSITE NÉT CĂNG RÕ RÀNG */
+.brand-area {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Tăng khoảng cách vừa vặn giúp chữ tách rời khỏi logo không bị dính */
+    text-decoration: none;
+}
+
+.main-logo {
+    height: 65px; /* Giữ nguyên kích thước to rõ ràng */
+    width: auto;
+    display: block;
+    transition: transform 0.3s ease;
+    /* ĐÃ SỬA: Xóa hoàn toàn drop-shadow màu trắng nhòe, thay bằng bóng tối đổ nhẹ phía sau giúp logo nét đanh */
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.site-title {
+    color: #ffffff;
+    font-size: 16px; /* Giữ nguyên kích thước nhỏ tinh tế */
+    font-weight: 800; /* ĐÃ SỬA: Tăng độ dày chữ lên tối đa để nét căng và đứng form */
+    letter-spacing: 0.8px; /* Giãn chữ ra một chút cho cực kỳ dễ nhìn */
+    text-transform: uppercase;
+    /* ĐÃ SỬA: Thay thế text-shadow trắng mờ bằng bóng đen đa tầng, tạo độ sâu tương phản giúp chữ nổi bật rõ nét trên nền màu */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7), 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.brand-area:hover .main-logo {
+    transform: scale(1.03); /* Tạo độ nảy nhẹ khi di chuột vào khối thương hiệu */
+}
+
+.brand-area:hover .site-title {
+    /* Khi hover chữ sẽ phát sáng trắng nổi sắc sảo đè bóng tối */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* 3. KHỐI BÊN PHẢI VÀ THANH MENU */
+.right-header-content {
+    display: flex;
+    align-items: center;
+    gap: 45px;
+}
+
+.main-menu ul {
+    list-style: none !important;
+    display: flex !important;
+    gap: 25px; 
+}
+
+.main-menu a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8); /* Màu chữ trắng mờ trên nền gradient */
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+/* Khi hover vào nút menu sẽ có một lớp nền tối mờ bọc lại để làm nổi bật chữ phát sáng */
+.main-menu a:hover, 
+.main-menu a.active {
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.3);
+    text-shadow: 0 0 8px #ffffff;
+    box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+/* 4. GÓC TÀI KHOẢN */
+.user-action {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-name {
+    font-size: 14px;
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.user-name strong {
+    color: #ffffff;
+    border-bottom: 2px dashed rgba(255, 255, 255, 0.6);
+}
+
+/* NÚT ĐĂNG XUẤT NỀN TỐI CHỮ TRẮNG PHÁT SÁNG ĐỂ NỔI TRÊN NỀN GRADIENT */
+.btn-logout {
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 800;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    background-color: rgba(0, 0, 0, 0.4);
+    text-transform: uppercase;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-logout:hover {
+    background-color: #ffffff;
+    color: #ff0055; /* Chữ đổi sang đỏ rực khi hover */
+    box-shadow: 0 0 15px #ffffff;
+    text-shadow: none;
+}

@@ -1,0 +1,60 @@
+/* Thiết lập cho toàn bộ trang index */
+body {
+    background-color: #121214; /* Nền tối đồng bộ với header */
+    color: #ffffff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.main-content {
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.main-content h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.main-content p.welcome-text {
+    color: #aaa;
+    margin-bottom: 25px;
+}
+
+/* Định dạng các ô tính năng (Card) */
+.dashboard-grid {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    background-color: #1a1a24;
+    border: 1px solid #2d2d3d;
+    padding: 20px;
+    border-radius: 6px;
+    max-width: 450px;
+}
+
+.card h3 {
+    color: #00ffaa;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #ccc;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.card-btn {
+    display: inline-block;
+    background-color: #00ffaa;
+    color: #121214;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-top: 15px;
+}
