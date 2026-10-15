@@ -1,0 +1,343 @@
+/* ==========================================================================
+   1. RESET & NỀN VŨ TRỤ LẤP LÁNH
+   ========================================================================== */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #030308;
+    background-image: 
+        radial-gradient(circle at 15% 20%, rgba(255, 0, 85, 0.35) 0%, transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(0, 255, 136, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(0, 119, 182, 0.2) 0%, transparent 60%);
+    background-size: 200% 200%;
+    animation: nebulaPulse 12s ease-in-out infinite alternate;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Tầng hạt sao lấp lánh */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    background-image: 
+        radial-gradient(1.5px 1.5px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 150px 120px, #00ff88, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 300px 250px, #ff0055, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 450px 80px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 600px 320px, #00e676, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 750px 190px, #ff0055, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 900px 390px, #ffffff, rgba(0,0,0,0));
+    background-size: 500px 500px;
+    animation: starTwinkle 4s ease-in-out infinite alternate;
+}
+
+/* ==========================================================================
+   2. KHUNG FORM THỦY TINH TRONG SUỐT (FIX LỖI MẢNG ĐỤC)
+   ========================================================================== */
+.login-wrapper {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+}
+
+/* Vòng hào quang đa sắc tự quay xung quanh khung */
+.login-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: -2px; right: -2px; bottom: -2px;
+    border-radius: 30px;
+    background: linear-gradient(45deg, #ff0055, #00ff88, #00d2ff, #9333ea, #ff0055);
+    background-size: 300% 300%;
+    z-index: -1;
+    filter: blur(20px);
+    opacity: 0.7;
+    animation: cosmicGlowSpin 6s linear infinite;
+}
+
+.login-box {
+    position: relative;
+    background: rgba(13, 15, 28, 0.75) !important; /* Đổi nền trong suốt sắc nét */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    border-radius: 26px;
+    padding: 40px 35px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8),
+                0 0 30px rgba(0, 255, 136, 0.2),
+                0 0 20px rgba(255, 0, 85, 0.2);
+    overflow: hidden;
+}
+
+/* XÓA LỚP BÓNG KÍNH ĐỤC CHE NỬA FORM */
+.login-box::before {
+    display: none !important;
+}
+
+/* ==========================================================================
+   3. HEADER & TIÊU ĐỀ
+   ========================================================================== */
+.login-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.login-header h2 {
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(0, 255, 136, 0.6);
+    margin-bottom: 6px;
+}
+
+.login-header p {
+    color: #a0a0c0;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+.error-msg {
+    background: rgba(255, 0, 85, 0.2);
+    border: 1px solid rgba(255, 0, 85, 0.5);
+    color: #ff6b8b;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ==========================================================================
+   4. TỐI ƯU CÁC Ô NHẬP INPUT (TRONG SUỐT & KHÔNG BỊ LỖI ĐỤC)
+   ========================================================================== */
+.login-form .input-group {
+    margin-bottom: 20px;
+}
+
+.login-form label {
+    display: block;
+    color: #e0e0ff;
+    font-size: 12.5px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 13px 16px;
+    background: rgba(5, 7, 15, 0.6) !important; /* Trong suốt không bị đổi màu nham nhở */
+    border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 14px;
+    color: #ffffff !important;
+    font-size: 14.5px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.login-form input:focus {
+    border-color: #00ff88 !important;
+    background: rgba(10, 15, 30, 0.85) !important;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+}
+
+.login-form input::placeholder {
+    color: #666688;
+}
+
+/* ==========================================================================
+   5. NÚT ĐĂNG NHẬP 3D BÓNG LOÁ CHUYỂN MÀU ĐỎ - LỤC
+   ========================================================================== */
+.btn-submit {
+    position: relative;
+    width: 100%;
+    padding: 14px 0;
+    margin-top: 10px;
+    border: 1.5px solid rgba(255, 255, 255, 0.8) !important;
+    border-radius: 20px !important;
+    
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(255,255,255,0.5);
+    cursor: pointer;
+    overflow: hidden;
+    
+    /* Gradient chuyển màu Đỏ - Lục chuẩn */
+    background: linear-gradient(135deg, #ff0055 0%, #00ff88 50%, #00d2ff 100%) !important;
+    background-size: 200% 200% !important;
+    
+    /* Bóng nổi 3D & Neon */
+    box-shadow: 
+        0 6px 0 #084c37,
+        0 10px 20px rgba(0, 0, 0, 0.6),
+        0 0 25px rgba(0, 255, 136, 0.5),
+        inset 0 2px 2px rgba(255, 255, 255, 0.8) !important;
+        
+    animation: smoothColorShift 5s ease infinite alternate;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Lớp bóng kính cong trên nút */
+.btn-submit::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 48%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.05) 100%);
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    pointer-events: none;
+}
+
+/* Vệt bóng lóa kim cương chạy qua */
+.btn-submit::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -130%;
+    width: 75%; height: 200%;
+    background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.9) 50%, transparent 100%);
+    transform: rotate(25deg);
+    pointer-events: none;
+    animation: autoGlareSweep 2.5s infinite;
+}
+
+.btn-submit:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 9px 0 #084c37, 0 15px 30px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 255, 136, 0.8);
+}
+
+.btn-submit:active {
+    transform: translateY(3px) scale(0.98);
+    box-shadow: 0 2px 0 #084c37, 0 5px 10px rgba(0,0,0,0.5);
+}
+
+/* ==========================================================================
+   6. FOOTER
+   ========================================================================== */
+.login-footer {
+    text-align: center;
+    margin-top: 22px;
+}
+
+.login-footer p {
+    color: #a0a0c0;
+    font-size: 13px;
+}
+
+.login-footer a {
+    color: #00ff88;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.login-footer a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 8px #00ff88;
+}
+
+/* KEYFRAMES */
+@keyframes nebulaPulse {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+
+@keyframes starTwinkle {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+@keyframes cosmicGlowSpin {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes autoGlareSweep {
+    0% { left: -130%; }
+    30% { left: 180%; }
+    100% { left: 180%; }
+}
+
+@keyframes smoothColorShift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+/* ==========================================================================
+   NÚT ĐĂNG KÝ GOOGLE & ĐƯỜNG PHÂN CÁCH (DIVIDER)
+   ========================================================================== */
+.social-login {
+    margin-bottom: 20px;
+}
+
+.btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 0;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn-google:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(66, 133, 244, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.btn-google:active {
+    transform: translateY(1px);
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #8888a0;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.divider span {
+    padding: 0 12px;
+}
