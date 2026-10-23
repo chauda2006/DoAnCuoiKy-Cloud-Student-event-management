@@ -1,0 +1,31 @@
+services:
+  # 1. Ứng dụng Web PHP thuần (Đã có sẵn trên máy bạn)
+  web:
+    image: php:8.1-apache
+    container_name: cloud_php_app
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+      # Giả lập Object Storage: Toàn bộ ảnh sẽ đẩy vào đây, hoàn toàn tách biệt khỏi code Web
+      - ./minio_data:/var/www/html/storage_disk
+    depends_on:
+      - db
+    command: >
+      sh -c "docker-php-ext-install pdo pdo_mysql mysqli && apache2-foreground"
+
+  # 2. Hệ quản trị cơ sở dữ liệu MySQL (Đã có sẵn trên máy bạn)
+  db:
+    image: mysql:8.0
+    container_name: cloud_mysql_db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: quan_ly_su_kien
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./quan_ly_su_kien.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  db_data:
